@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@theme {
+  /* ——— الهوية اللونية ——— */
+  --color-forest: #183d32;
+  --color-forest-deep: #102b22;
+  --color-forest-soft: #24503f;
+  --color-ivory: #f8f5ee;
+  --color-ivory-deep: #f1ebdf;
+  --color-sage: #a9b7a5;
+  --color-sage-light: #cfd8cb;
+  --color-sage-pale: #e6ebe2;
+  --color-gold: #b7a16a;
+  --color-gold-deep: #9c8650;
+  --color-gold-light: #d8c894;
+  --color-charcoal: #282b28;
+  --color-ink: #3a3d38;
+  --color-muted: #6d7268;
+
+  /* ——— الخطوط ——— */
+  --font-serif-ar: "Amiri", "IBM Plex Sans Arabic", serif;
+  --font-sans-ar: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-latin: "Marcellus", serif;
+
+  /* ——— حركات ——— */
+  --animate-spin-slow: spin 40s linear infinite;
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(50%); }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+body {
+  font-family: var(--font-sans-ar);
+  background-color: var(--color-ivory);
+  color: var(--color-charcoal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-forest);
+  color: var(--color-ivory);
+}
+
+/* ——— شريط التمرير ——— */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-ivory-deep); }
+::-webkit-scrollbar-thumb { background: var(--color-sage); border-radius: 8px; border: 2px solid var(--color-ivory-deep); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-forest-soft); }
+
+/* ——— قوس معماري إسلامي للصور ——— */
+.arch {
+  border-radius: 999px 999px 0 0;
+}
+.arch-frame {
+  border-radius: 999px 999px 0 0;
+}
+
+/* ——— زخرفة هندسية خفيفة كخلفية ——— */
+.pattern-light {
+  background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23183D32' stroke-opacity='0.055'%3E%3Cpath d='M36 4 44 28 68 36 44 44 36 68 28 44 4 36 28 28Z'/%3E%3Ccircle cx='36' cy='36' r='5'/%3E%3Cpath d='M0 0h14M0 0v14M72 0H58M72 0v14M0 72h14M0 72V58M72 72H58M72 72V58'/%3E%3C/g%3E%3C/svg%3E");
+}
+.pattern-dark {
+  background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23F8F5EE' stroke-opacity='0.05'%3E%3Cpath d='M36 4 44 28 68 36 44 44 36 68 28 44 4 36 28 28Z'/%3E%3Ccircle cx='36' cy='36' r='5'/%3E%3Cpath d='M0 0h14M0 0v14M72 0H58M72 0v14M0 72h14M0 72V58M72 72H58M72 72V58'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ——— رابط تحريري بسطر ينمو ——— */
+.link-line {
+  position: relative;
+}
+.link-line::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  inset-inline-start: 0;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform-origin: inline-end;
+  transform: scaleX(0);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-line:hover::after,
+.link-line.is-active::after {
+  transform: scaleX(1);
+  transform-origin: inline-start;
+}
+
+/* ——— حرف استهلالي كبير للمقالات ——— */
+.drop-cap::first-letter {
+  font-family: var(--font-serif-ar);
+  font-size: 3.4em;
+  float: right;
+  line-height: 0.85;
+  padding-left: 0.12em;
+  padding-top: 0.08em;
+  color: var(--color-forest);
+  font-weight: 700;
+}
+
+/* ——— تنسيق نصوص المقال ——— */
+.article-body p {
+  line-height: 2.15;
+  margin-bottom: 1.6em;
+  color: var(--color-ink);
+}
+.article-body h3 {
+  font-family: var(--font-serif-ar);
+  font-weight: 700;
+  color: var(--color-forest);
+  font-size: 1.45em;
+  margin: 1.8em 0 0.7em;
+  line-height: 1.6;
+}
+.article-body blockquote p {
+  margin-bottom: 0;
+  color: var(--color-forest);
+}
+
+/* ——— حقول النموذج ——— */
+.field {
+  width: 100%;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-sage) 55%, transparent);
+  padding: 0.85rem 1.1rem;
+  font-size: 0.95rem;
+  color: var(--color-charcoal);
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.field::placeholder { color: var(--color-muted); opacity: 0.75; }
+.field:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  background: #fffdf8;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold) 18%, transparent);
+}
+.field-error { border-color: #b4543f !important; }
+
+/* ——— إطار مزدوج أنيق ——— */
+.double-frame {
+  position: relative;
+}
+.double-frame::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 45%, transparent);
+  pointer-events: none;
+}
+
+/* تقليل الحركة لذوي الحساسية */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
